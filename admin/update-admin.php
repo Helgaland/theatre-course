@@ -11,7 +11,7 @@
 
             $sql="SELECT * FROM tbl_admin WHERE id=$id";
 
-            $res=mysqli_query($conn,$sql);
+            $res=mysqli_query($conn, $sql);
 
             if($res==TRUE)
             {
