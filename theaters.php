@@ -4,7 +4,7 @@
     <section class="theater-search text-center">
         <div class="container">
             
-            <form action="theater-search.html" method="POST">
+            <form action="<?php echo SITEURL; ?>theater-search.php" method="POST">
                 <input type="search" name="search" placeholder="Search for theater.." required>
                 <input type="submit" name="submit" value="Search" class="btn btn-primary">
             </form>
@@ -66,9 +66,6 @@
                                     <p class="theater-detail">
                                         <?php echo $description; ?>
                                     </p>
-                                    <br>
-
-                                    <a href="theaters.php" class="btn btn-primary">Information</a>
                                 </div>
                             </div>
 

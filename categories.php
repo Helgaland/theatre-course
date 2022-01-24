@@ -21,7 +21,7 @@
                         $image_name = $row['image_name'];
                         ?>
 
-                        <a href="category-theaters.html">
+                        <a href="<?php echo SITEURL; ?>category-theaters.php?category_id=<?php echo $id; ?>">
                         <div class="box-3 float-container">
                             <?php
                                 if($image_name=="")

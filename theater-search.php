@@ -3,8 +3,13 @@
     <!-- theater sEARCH Section Starts Here -->
     <section class="theater-search text-center">
         <div class="container">
+            <?php
+
+                $search = $_POST['search'];
+
+            ?>
             
-            <h2>theaters on Your Search <a href="#" class="text-white">"Momo"</a></h2>
+            <h2>Theaters on Your Search <a href="#" class="text-white">"<?php echo $search; ?>"</a></h2>
 
         </div>
     </section>
@@ -17,108 +22,65 @@
         <div class="container">
             <h2 class="text-center">Theaters</h2>
 
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+            <?php 
 
-                <div class="theater-menu-desc">
-                    <h4>theater Title</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                $sql = "SELECT * FROM tbl_theaters WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR place LIKE '%$search%'";
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                $res = mysqli_query($conn, $sql);
 
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-burger.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+                $count = mysqli_num_rows($res);
 
-                <div class="theater-menu-desc">
-                    <h4>Smoky Burger</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                if($count>0)
+                {
+                    while($row=mysqli_fetch_assoc($res))
+                    {
+                        $id = $row['id'];
+                        $title = $row['title'];
+                        $price = $row['price'];
+                        $date = $row['date'];
+                        $place = $row['place'];
+                        $image_name = $row['image_name'];
+                        $description = $row['description'];
+                        $image_name = $row['image_name'];
+                        ?>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                            <div class="theater-menu-box">
+                                <div class="theater-menu-img">
+                                    <?php
+                                    if($image_name=="")
+                                    {  
+                                        echo "<div class='error'>Image Not Available</div>";
+                                    } 
+                                    else
+                                    {
+                                        ?>
+                                        <img src="<?php echo SITEURL; ?>images/theaters/<?php echo $image_name; ?>" alt="Theater2" class="img-responsive img-curve">
+                                        <?php
+                                    }
+                                ?>
+                                </div>
 
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-burger.jpg" alt="Chicke Hawain Burger" class="img-responsive img-curve">
-                </div>
+                                <div class="theater-menu-desc">
+                                    <h4><?php echo $title; ?> - <?php echo $date; ?></h4>
+                                    <p class="theater-price">$<?php echo $price; ?></p>
+                                    <p class="theater-price">Place: <?php echo $place; ?></p>
+                                    <p class="theater-detail">
+                                        <?php echo $description; ?>
+                                    </p>
+                                    <br>
 
-                <div class="theater-menu-desc">
-                    <h4>Nice Burger</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                                    <a href="theaters.php" class="btn btn-primary">Information</a>
+                                </div>
+                            </div>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
-
-                <div class="theater-menu-desc">
-                    <h4>theater Title</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
-
-                <div class="theater-menu-desc">
-                    <h4>theater Title</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-momo.jpg" alt="Chicke Hawain Momo" class="img-responsive img-curve">
-                </div>
-
-                <div class="theater-menu-desc">
-                    <h4>Chicken Steam Momo</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
+                        <?php
+                    }
+                }
+                else
+                {
+                    echo "<div class='error'> Theater Not Found.</div>";
+                }
+            ?>
 
             <div class="clearfix"></div>
 
