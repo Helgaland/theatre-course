@@ -138,7 +138,7 @@
                     <td>Featured: </td>
                     <td>
                         <input <?php if($featured=="Yes") {echo "checked";} ?> type="radio" name="featured" value="Yes"> Yes
-                        <input <?php if($featured=="No") {echo "checked";} ?>type="radio" name="featured" value="No"> No
+                        <input <?php if($featured=="No") {echo "checked";} ?> type="radio" name="featured" value="No"> No
                     </td>
                 </tr>
 
@@ -210,6 +210,10 @@
                                 die();
                             }
                         }
+                    }
+                    else
+                    {
+                        $image_name = $current_image;
                     }
                 }
                 else

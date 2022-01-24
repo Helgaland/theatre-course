@@ -1,46 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <!-- Important to make website responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theater</title>
-
-    <!-- Link our CSS file -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <!-- Navbar Section Starts Here -->
-    <section class="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="#" title="Logo">
-                    <img src="images/logo.png" alt="Theater Logo" class="img-responsive">
-                </a>
-            </div>
-
-            <div class="menu text-right">
-                <ul>
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="categories.html">Categories</a>
-                    </li>
-                    <li>
-                        <a href="theaters.html">Theaters</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
-    </section>
-    <!-- Navbar Section Ends Here -->
+<?php include('partials-front/menu.php'); ?>
 
     <!-- theater sEARCH Section Starts Here -->
     <section class="theater-search text-center">
@@ -60,30 +18,49 @@
         <div class="container">
             <h2 class="text-center">Explore theaters</h2>
 
-            <a href="category-theaters.html">
-            <div class="box-3 float-container">
-                <img src="images/theater1.jpg" alt="Theater1" class="img-responsive img-curve">
 
-                <h3 class="float-text text-white">Theater1</h3>
-            </div>
-            </a>
+            <?php
+                $sql = "SELECT * FROM tbl_category WHERE active='Yes' AND featured='Yes' LIMIT 3";
+                $res = mysqli_query($conn, $sql);
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="images/theater2.jpg" alt="Theater2" class="img-responsive img-curve">
+                $count = mysqli_num_rows($res);
 
-                <h3 class="float-text text-white">Theater2</h3>
-            </div>
-            </a>
+                if($count>0)
+                {
+                    while($row=mysqli_fetch_assoc($res))
+                    {
+                        $id = $row['id'];
+                        $title = $row['title'];
+                        $image_name = $row['image_name'];
+                        ?>
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="images/theater3.jpg" alt="Theater3" class="img-responsive img-curve">
+                        <a href="category-theaters.html">
+                        <div class="box-3 float-container">
+                            <?php
+                                if($image_name=="")
+                                {
+                                    echo "<div class='error'>Image Not Available</div>";
+                                } 
+                                else
+                                {
+                                    ?>
+                                    <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" alt="Theater2" class="img-responsive img-curve">
+                                    <?php
+                                }
+                            ?>
+                            
+                            <h3 class="float-text text-white"><?php echo $title; ?></h3>
+                        </div>
+                        </a>
 
-                <h3 class="float-text text-white">Theater3</h3>
-            </div>
-            </a>
-
+                        <?php
+                    }
+                }
+                else
+                {
+                    echo "<div class='error'>Category Not Added.</div>";
+                }
+            ?>
             <div class="clearfix"></div>
         </div>
     </section>
@@ -94,107 +71,66 @@
         <div class="container">
             <h2 class="text-center">Theaters</h2>
 
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-theater1.jpg" alt="Theater1" class="img-responsive img-curve">
-                </div>
+                <?php
 
-                <div class="theater-menu-desc">
-                    <h4>theater Title 2</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Theater Info.
-                    </p>
-                    <br>
+                $sql2 = "SELECT * FROM tbl_theaters WHERE active='Yes' AND featured='Yes' LIMIT 3";
 
-                    <a href="order.html" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                $res2 = mysqli_query($conn, $sql2);
 
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-theater2.jpg" alt="theater2" class="img-responsive img-curve">
-                </div>
+                $count2 = mysqli_num_rows($res2);
 
-                <div class="theater-menu-desc">
-                    <h4>theater2</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Theater Info.
-                    </p>
-                    <br>
+                if($count2>0)
+                {
+                    while($row=mysqli_fetch_assoc($res2))
+                    {
+                        $id = $row['id'];
+                        $title = $row['title'];
+                        $price = $row['price'];
+                        $date = $row['date'];
+                        $place = $row['place'];
+                        $image_name = $row['image_name'];
+                        $description = $row['description'];
+                        $image_name = $row['image_name'];
+                        ?>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                            <div class="theater-menu-box">
+                                <div class="theater-menu-img">
+                                    <?php
+                                    if($image_name=="")
+                                    {  
+                                        echo "<div class='error'>Image Not Available</div>";
+                                    } 
+                                    else
+                                    {
+                                        ?>
+                                        <img src="<?php echo SITEURL; ?>images/theaters/<?php echo $image_name; ?>" alt="Theater2" class="img-responsive img-curve">
+                                        <?php
+                                    }
+                                ?>
+                                </div>
 
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-theater3.jpg" alt="theater3" class="img-responsive img-curve">
-                </div>
+                                <div class="theater-menu-desc">
+                                    <h4><?php echo $title; ?> - <?php echo $date; ?></h4>
+                                    <p class="theater-price">$<?php echo $price; ?></p>
+                                    <p class="theater-price">Place: <?php echo $place; ?></p>
+                                    <p class="theater-detail">
+                                        <?php echo $description; ?>
+                                    </p>
+                                    <br>
 
-                <div class="theater-menu-desc">
-                    <h4>theater3</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Theater Info.
-                    </p>
-                    <br>
+                                    <a href="theaters.php" class="btn btn-primary">Information</a>
+                                </div>
+                            </div>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                        <?php
+                    }
+                }
+                else
+                {
+                    echo "<div class='error'>Theater Not Available</div>";
+                }
 
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-theater1.jpg" alt="theater1" class="img-responsive img-curve">
-                </div>
-
-                <div class="theater-menu-desc">
-                    <h4>theater Title</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Theater Info.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-theater2.jpg" alt="theater2" class="img-responsive img-curve">
-                </div>
-
-                <div class="theater-menu-desc">
-                    <h4>theater Title</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Theater Info.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="theater-menu-box">
-                <div class="theater-menu-img">
-                    <img src="images/menu-theater3.jpg" alt="theater3" class="img-responsive img-curve">
-                </div>
-
-                <div class="theater-menu-desc">
-                    <h4>theater 3</h4>
-                    <p class="theater-price">$2.3</p>
-                    <p class="theater-detail">
-                        Theater Info.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                ?>
 
 
             <div class="clearfix"></div>
@@ -209,31 +145,4 @@
     </section>
     <!-- Theaters Section Ends Here -->
 
-    <!-- social Section Starts Here -->
-    <section class="social">
-        <div class="container text-center">
-            <ul>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/50/000000/facebook-new.png"/></a>
-                </li>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/></a>
-                </li>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></a>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <!-- social Section Ends Here -->
-
-    <!-- footer Section Starts Here -->
-    <section class="footer">
-        <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">Marin Vasilev</a></p>
-        </div>
-    </section>
-    <!-- footer Section Ends Here -->
-
-</body>
-</html>
+    <?php include('partials-front/footer.php'); ?>
