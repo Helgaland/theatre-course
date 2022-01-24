@@ -33,6 +33,11 @@
                         echo $_SESSION['unauth'];
                         unset($_SESSION['unauth']);
                     }
+                    if(isset($_SESSION['update']))
+                    {
+                        echo $_SESSION['update'];
+                        unset($_SESSION['update']);
+                    }
                 ?>
 
                 <table class="tbl-full">
@@ -40,6 +45,8 @@
                         <th>S.N.</th>
                         <th>Title</th>
                         <th>Price</th>
+                        <th>Date</th>
+                        <th>Place</th>
                         <th>Image</th>
                         <th>Featured</th>
                         <th>Active</th>
@@ -60,6 +67,8 @@
                                 $id = $row['id'];
                                 $title = $row['title'];
                                 $price = $row['price'];
+                                $date = $row['date'];
+                                $place = $row['place'];
                                 $image_name = $row['image_name'];
                                 $featured = $row['featured'];
                                 $active = $row['active'];
@@ -69,6 +78,8 @@
                                         <td><?php echo $sn++; ?></td>
                                         <td><?php echo $title; ?></td>
                                         <td>$<?php echo $price; ?></td>
+                                        <td><?php echo $date; ?></td>
+                                        <td><?php echo $place; ?></td>
                                         
 
                                         <td>

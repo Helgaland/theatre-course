@@ -41,6 +41,20 @@
             </tr>
 
             <tr>
+                <td>Date: </td>
+                <td>
+                    <input type="date" name="date">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Place: </td>
+                <td>
+                    <input type="text" name="place" placeholder="Place of the Event">
+                </td>
+            </tr>
+
+            <tr>
                 <td>Image: </td>
                 <td>
                     <input type="file" name="image">
@@ -114,6 +128,8 @@
                 $title = $_POST['title'];
                 $description = $_POST['description'];
                 $price = $_POST['price'];
+                $date = $_POST['date'];
+                $place = $_POST['place'];
                 $category = $_POST['category'];
 
                 if(isset($_POST['featured']))
@@ -166,6 +182,8 @@
                     title = '$title',
                     description = '$description',
                     price = '$price',
+                    date = '$date',
+                    place = '$place',
                     image_name = '$image_name',
                     category_id = '$category',
                     featured = '$featured',
