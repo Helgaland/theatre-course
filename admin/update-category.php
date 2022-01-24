@@ -136,6 +136,9 @@
                             header('location:'.SITEURL.'admin/manage-category.php');
                             die();
                         }
+
+                        if($current_image!="")
+                        {
                             $remove_path = "../images/category/".$current_image;
     
                             $remove = unlink($remove_path);
@@ -146,6 +149,7 @@
                                 header('location:'.SITEURL.'admin/manage-category.php');
                                 die();
                             }
+                        }
                     }
                     else
                     {

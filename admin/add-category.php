@@ -133,7 +133,6 @@
                 {
                     $_SESSION['add'] = "<div class='error'>Failed to Add Category</div>";
                     header("location:".SITEURL.'admin/manage-category.php');
-
                 }
             }
         ?>
