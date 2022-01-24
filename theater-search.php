@@ -9,7 +9,7 @@
 
             ?>
             
-            <h2>Theaters on Your Search <a href="#" class="text-white">"<?php echo $search; ?>"</a></h2>
+            <h2 style="color: yellow;">Theaters on Your Search <a href="#" class="text-white">"<?php echo $search; ?>"</a></h2>
 
         </div>
     </section>
